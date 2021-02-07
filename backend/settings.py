@@ -3,8 +3,8 @@ from dotenv import load_dotenv, find_dotenv
 load_dotenv(find_dotenv())
 import django_heroku
 
-DATABASE_PASSWORD = os.getenv("DB_PASSWORD")
-DATABASE_USER = os.getenv("DB_USER")
+# DATABASE_PASSWORD = os.getenv("DB_PASSWORD")
+# DATABASE_USER = os.getenv("DB_USER")
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django_filters',
     'kit',
     'products',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -79,12 +80,6 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.getenv("DB_NAME"),
-        'USER': os.getenv("DB_USER"),
-        'PASSWORD': os.getenv("DB_PASSWORD"),
-        'HOST': os.getenv("DB_HOST"),
-        'PORT': os.getenv("DB_PORT"), 
     }
 }
 
@@ -128,12 +123,12 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'filestatic')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [
-#     os.path.join(BASE_DIR, "staticfiles"), 
-# ]
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"), 
+]
 
 MEDIA_ROOT =  os.path.join(BASE_DIR, 'files/images')
 MEDIA_URL = '/files/images/'
@@ -145,5 +140,10 @@ REST_FRAMEWORK = {
 
     'DEFAULT_AUTHENTICATION_CLASSES': ('rest_framework_simplejwt.authentication.JWTAuthentication', ),
 }
+
+try:
+    from backend.settings_local import *
+except ImportError as e:
+    pass
 
 django_heroku.settings(locals())

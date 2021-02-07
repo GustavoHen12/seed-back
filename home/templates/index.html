@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% block title %}<title>Behope Api</title>{% endblock %}
+        <link rel="stylesheet" href="{% static 'css/style.css' %}">
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,300,400,600,700,900" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&family=Open+Sans:wght@600&display=swap" rel="stylesheet">
+    </head>
+<body class = "bkgColor">
+    <header>
+        <img class = "logo" src ="{% static "assets/logo.png" %}">
+        <h1 class = "titulo">Bem vindo a api do BeHope !</h1>
+    </header>  
+    <div class = "container">
+        <!--Créditos dos cards: https://codepen.io/saiyedfaizan19/pen/EERjyq-->
+        <a href='/kits/projects/'>
+            <div class="card card-3">
+                <h3>Projetos</h3>
+                <p>{{Projects}} projetos já estão utilizando nossa platoforma</p>
+            </div>
+        </a>
+        <a href='/kits/kit/'>
+            <div class="card card-2">
+                <h3>Kits</h3>
+                <p>Com {{Kits}} kits prontos para ajudar muitas pessoas</p>
+            </div>
+        </a>
+        <a href='/products/'>
+            <div class="card card-1">
+                <h3>Produtos</h3>
+                <p>E {{Products}} produtos cadastrados, prontos para serem doados</p>
+            </div>
+        </a>
+    </div>
+</body>
+</html>
