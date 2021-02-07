@@ -35,7 +35,13 @@ class Kit(models.Model):
         "Goal number of kits",
     )
     img = models.ImageField(
-        default="defaultImage.jpg"
+        default="defaultImage.jpg",
+        null=True,
+        blank=True,
+    )
+    imgUrl = models.URLField(
+        null=True,
+        blank=True,
     )
     def __str__(self):
         return self.name
@@ -54,6 +60,10 @@ class Kit_product(models.Model):
     )
     donated = models.IntegerField(
         "Number of this product donated",
+    )
+    in_kit = models.IntegerField(
+        "Number of this product in a kit",
+        default=0,
     )
 
     def __str__(self):

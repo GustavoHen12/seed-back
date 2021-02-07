@@ -27,16 +27,22 @@ class Product(models.Model):
         "Product Description",
         max_length=140,
     )
+    # The img field is optional and the imgUrl exist because
+    # the heroku server dont keep static photos saved, so the
+    # img url is an option
     img = models.ImageField(
-        default="defaultImage.jpg"
+        default="defaultImage.jpg",
+        null=True,
+        blank=True,
+    )
+    imgUrl = models.URLField(
+        null=True,
+        blank=True,
     )
     price = models.DecimalField(
         "Product Price",
         max_digits=10, 
         decimal_places=2,
-    )
-    in_kit = models.IntegerField(
-        "Number of this product in a kit",
     )
     outfitter = models.ForeignKey(
         Outfitter,
