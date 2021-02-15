@@ -1,5 +1,7 @@
 from django.db import models
 
+from django.contrib.auth.models import  User, Group
+
 class Outfitter(models.Model):
     name = models.CharField(
         "Outfitter Name",
@@ -53,3 +55,26 @@ class Product(models.Model):
     
     def __str__(self):
         return self.name
+
+class Bag(models.Model):
+    kit = models.ForeignKey(
+        "kit.Kit", 
+        on_delete=models.CASCADE,
+        verbose_name="Kit",
+    )
+    product = models.ForeignKey(
+        Product, 
+        on_delete=models.CASCADE,
+        verbose_name="Product",
+    )
+    quantity = models.IntegerField(
+        "Number of this product in bag",
+    )
+    user = models.ForeignKey(
+        User,
+        verbose_name = 'User',
+        on_delete=models.CASCADE,
+    )
+
+    def __str__(self):
+        return self.user.username
