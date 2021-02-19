@@ -21,10 +21,7 @@ class BagSerializer(serializers.HyperlinkedModelSerializer):
         many=False,
         queryset=Product.objects.all(),
     ) 
-    user = serializers.PrimaryKeyRelatedField(
-        many=False,
-        queryset=User.objects.all(),
-    ) 
+    user = serializers.HiddenField(default=serializers.CurrentUserDefault())
     class Meta:
         model = Bag
         fields = ('quantity', 'kit', 'product', 'user')
