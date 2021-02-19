@@ -1,5 +1,7 @@
 from rest_framework import serializers
 from .models import Product, Bag
+from kit.models import Kit
+from django.contrib.auth.models import  User
 
 class ProductSerializer(serializers.HyperlinkedModelSerializer):
     outfitter = serializers.StringRelatedField(
@@ -8,21 +10,25 @@ class ProductSerializer(serializers.HyperlinkedModelSerializer):
     )
     class Meta:
         model = Product
-        fields = '__all__'
+        fields = ('id', 'name', 'description', 'img', 'imgUrl', 'price', 'outfitter')
 
 class BagSerializer(serializers.HyperlinkedModelSerializer):
     kit = serializers.PrimaryKeyRelatedField(
         many=False,
-        read_only=True
+        queryset=Kit.objects.all(),
     )
-    product = ProductSerializer(
+    product = serializers.PrimaryKeyRelatedField(
         many=False,
-        read_only=True
-    )
+        queryset=Product.objects.all(),
+    ) 
     user = serializers.PrimaryKeyRelatedField(
         many=False,
-        read_only=True
+        queryset=User.objects.all(),
     ) 
     class Meta:
         model = Bag
-        fields = '__all__'
+        fields = ('quantity', 'kit', 'product', 'user')
+
+    def to_representation(self, instance):
+        self.fields['product'] =  ProductSerializer(read_only=True)
+        return super(BagSerializer, self).to_representation(instance)
