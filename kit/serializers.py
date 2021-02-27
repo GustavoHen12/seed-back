@@ -8,13 +8,17 @@ class ProjectSerializer(serializers.HyperlinkedModelSerializer):
         fields = '__all__'
 
 class KitSerializer(serializers.HyperlinkedModelSerializer):
-    project = serializers.PrimaryKeyRelatedField(
+    # project = serializers.PrimaryKeyRelatedField(
+    #     many=False,
+    #     read_only=True
+    # )
+    project = ProjectSerializer(
         many=False,
         read_only=True
     )
     class Meta:
         model = Kit
-        fields = ('id', 'name', 'project', 'description', 'img', 'goal')
+        fields = ('id', 'name', 'project', 'description', 'img', 'imgUrl', 'goal')
 
 class KitProductSerializer(serializers.HyperlinkedModelSerializer):
     kit = KitSerializer(
