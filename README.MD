@@ -2,10 +2,10 @@
 
 > Imagine estar em uma loja virtual, mas ao invés de comprar algo para você, é possível doar para aqueles que mais precisam. Isso é o Behope.
 
+[Frontend](https://github.com/GustavoHen12/seed-front)
+
 ## O que estou usando
 O backend foi contruido com [Django](https://www.djangoproject.com/) + [Rest](https://www.django-rest-framework.org/). E o sistema de autenticação foi feito utilizando [jwt](https://django-rest-framework-simplejwt.readthedocs.io/en/latest/)
-
-[Frontend](https://github.com/GustavoHen12/seed-front)
 
 ## TODO
 - [ ] Receber confirmação de doação
